@@ -16,6 +16,5 @@ export const api = createApi({
       return headers;
     },
   }),
-  tagTypes: ["Weather", "WeatherCity", "Cache", "City"],
   endpoints: () => ({}),
 });
