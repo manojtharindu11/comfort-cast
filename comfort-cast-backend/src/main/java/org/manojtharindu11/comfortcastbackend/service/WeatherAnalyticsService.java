@@ -59,8 +59,9 @@ public class WeatherAnalyticsService {
         double temperature = weather.main().temp();
         double humidity = weather.main().humidity();
         double windSpeed = weather.wind().speed();
+        double pressure = weather.main().pressure();
 
-        int comfortIndex = comfortIndexService.compute(temperature, humidity, windSpeed);
+        int comfortIndex = comfortIndexService.compute(temperature, humidity, windSpeed, pressure);
 
         String description = getDescription(weather);
 
@@ -73,6 +74,7 @@ public class WeatherAnalyticsService {
         cityWeather.setHumidity(humidity);
         cityWeather.setWindMps(windSpeed);
         cityWeather.setComfortIndex(comfortIndex);
+        cityWeather.setPressure(pressure);
 
         return cityWeather;
     }
@@ -98,6 +100,7 @@ public class WeatherAnalyticsService {
                 weather.getTempC(),
                 weather.getHumidity(),
                 weather.getWindMps(),
+                weather.getPressure(),
                 weather.getComfortIndex(),
                 weather.getRank()
         );

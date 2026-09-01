@@ -7,6 +7,7 @@ public record CityWeatherDto(
         double tempC,
         double humidity,
         double windMps,
+        double pressure,
         int comfortIndex,
         int rank
 ) {

@@ -14,6 +14,7 @@ public class CityWeather {
     private double tempC;
     private double humidity;
     private double windMps;
+    private double pressure;
     private int comfortIndex;
     private int rank;
 }

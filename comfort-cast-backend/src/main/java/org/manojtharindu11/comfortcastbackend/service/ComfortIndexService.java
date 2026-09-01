@@ -5,16 +5,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class ComfortIndexService {
 
-    private static final double TEMP_WEIGHT = 0.5;
-    private static final double HUMIDITY_WEIGHT = 0.3;
+    private static final double TEMP_WEIGHT = 0.4;
+    private static final double HUMIDITY_WEIGHT = 0.25;
     private static final double WIND_WEIGHT = 0.2;
+    private static final double PRESSURE_WEIGHT = 0.15;
 
-    public int compute(double tempC, double humidity, double windMps) {
+    public int compute(double tempC, double humidity, double windMps, double pressure) {
         double temperatureScore = temperatureScore(tempC);
         double humidityScore = humidityScore(humidity);
         double windScore = windScore(windMps);
+        double pressureScore = pressureScore(pressure);
 
-        double total = TEMP_WEIGHT * temperatureScore + HUMIDITY_WEIGHT * humidityScore + WIND_WEIGHT * windScore;
+        double total = TEMP_WEIGHT * temperatureScore
+                + HUMIDITY_WEIGHT * humidityScore
+                + WIND_WEIGHT * windScore
+                + PRESSURE_WEIGHT * pressureScore;
 
         return (int) Math.floor(total + 0.5);
     }
@@ -53,5 +58,17 @@ public class ComfortIndexService {
             return Math.max(0.0, 100.0 - (idealLow - windMps) * 60.0);
         }
         return Math.max(0.0, 100.0 - (windMps - idealHigh) * 15.0);
+    }
+
+    private double pressureScore(double pressure) {
+        double idealLow = 1005;
+        double idealHigh = 1020;
+        if (pressure >= idealLow && pressure <= idealHigh) {
+            return 100.0;
+        }
+        if (pressure < idealLow) {
+            return Math.max(0.0, 100.0 - (idealLow - pressure) * 2.0);
+        }
+        return Math.max(0.0, 100.0 - (pressure - idealHigh) * 2.0);
     }
 }

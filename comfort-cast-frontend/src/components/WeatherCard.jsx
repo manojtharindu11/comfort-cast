@@ -41,6 +41,10 @@ export default function WeatherCard({ city }) {
             <div className="text-muted-foreground text-[11px] uppercase tracking-wide">Wind</div>
             <div className="font-semibold tabular-nums">{city.windMps.toFixed(1)} m/s</div>
           </div>
+          <div>
+            <div className="text-muted-foreground text-[11px] uppercase tracking-wide">Pressure</div>
+            <div className="font-semibold tabular-nums">{city.pressure.toFixed(0)} hPa</div>
+          </div>
         </div>
       </CardContent>
     </Card>

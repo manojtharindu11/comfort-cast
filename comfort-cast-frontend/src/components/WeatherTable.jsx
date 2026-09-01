@@ -14,6 +14,7 @@ export default function WeatherTable({ cities }) {
             <TableHead className="text-right">Temp</TableHead>
             <TableHead className="text-right">Humidity</TableHead>
             <TableHead className="text-right">Wind</TableHead>
+            <TableHead className="w-44">Pressure</TableHead>
             <TableHead className="w-44">Comfort Score</TableHead>
           </TableRow>
         </TableHeader>
@@ -28,6 +29,7 @@ export default function WeatherTable({ cities }) {
               <TableCell className="text-right tabular-nums">{city.tempC.toFixed(1)}°C</TableCell>
               <TableCell className="text-right tabular-nums">{city.humidity.toFixed(0)}%</TableCell>
               <TableCell className="text-right tabular-nums">{city.windMps.toFixed(1)} m/s</TableCell>
+              <TableCell className="text-right tabular-nums">{city.pressure.toFixed(0)} hPa</TableCell>
               <TableCell>
                 <div className="flex items-center gap-2">
                   <span className="w-6 text-right font-semibold tabular-nums">
