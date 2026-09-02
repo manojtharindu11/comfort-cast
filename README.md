@@ -142,19 +142,19 @@ The score for each factor is clamped to the range 0 to 100, and the final total 
 
 The weighting reflects the relative influence each variable has on perceived comfort in everyday conditions.
 
-### Temperature — 0.40
+### Temperature - 0.40
 
 Temperature is the strongest determinant of comfort because it directly affects how warm or cool a person feels. It can dominate a day’s perceived comfort, so it receives the largest weight.
 
-### Humidity — 0.25
+### Humidity - 0.25
 
 Humidity matters because it changes how the body experiences heat. High humidity makes warm conditions feel more oppressive, while low humidity can also feel uncomfortable in some environments. This gives humidity a meaningful but secondary role.
 
-### Wind — 0.20
+### Wind - 0.20
 
 Wind has a noticeable effect on thermal sensation, especially in hot weather. It can cool the body but can also feel unpleasant when excessive. It is important, but less dominant than temperature in general human comfort perception.
 
-### Pressure — 0.15
+### Pressure - 0.15
 
 Pressure is included as a secondary environmental factor. It contributes to the total, but it is not as directly felt by people as temperature or humidity. It is useful as a supporting signal rather than a primary comfort driver.
 
