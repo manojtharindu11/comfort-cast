@@ -7,6 +7,8 @@ import org.manojtharindu11.comfortcastbackend.dto.ApiResponseDto;
 import org.manojtharindu11.comfortcastbackend.dto.CacheDebugDto;
 import org.manojtharindu11.comfortcastbackend.dto.CityDto;
 import org.manojtharindu11.comfortcastbackend.dto.CityWeatherDto;
+import org.manojtharindu11.comfortcastbackend.exception.CityNotFoundException;
+import org.manojtharindu11.comfortcastbackend.exception.WeatherDataUnavailableException;
 import org.manojtharindu11.comfortcastbackend.service.CacheDebugService;
 import org.manojtharindu11.comfortcastbackend.service.CityService;
 import org.manojtharindu11.comfortcastbackend.service.WeatherAnalyticsService;
@@ -37,8 +39,7 @@ public class WeatherController {
         CityDto cityDto = cityService.getCityByCode(cityCode);
 
         if (cityDto == null) {
-            return ResponseEntity.badRequest()
-                    .body(new ApiResponseDto<>("Unknow city code: " + cityCode, null));
+            throw new CityNotFoundException(cityCode);
         }
 
         List<CityWeatherDto> ranked = analyticsService.getRankedWeather();
@@ -49,8 +50,7 @@ public class WeatherController {
                 .orElse(null);
 
         if (match == null) {
-            return ResponseEntity.status(502).body(new ApiResponseDto<>
-                    ("Weather data unavailable for city: " + cityCode, null));
+            throw new WeatherDataUnavailableException("Weather data unavailable for city: " + cityCode);
         }
         return ResponseEntity.ok(new ApiResponseDto<>
                 ("Successfully get the city weather information", match));

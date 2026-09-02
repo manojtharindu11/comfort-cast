@@ -6,6 +6,7 @@ import org.manojtharindu11.comfortcastbackend.constant.CacheConstants;
 import org.manojtharindu11.comfortcastbackend.dto.CityDto;
 import org.manojtharindu11.comfortcastbackend.dto.CityWeatherDto;
 import org.manojtharindu11.comfortcastbackend.dto.WeatherResponseDto;
+import org.manojtharindu11.comfortcastbackend.exception.WeatherDataUnavailableException;
 import org.manojtharindu11.comfortcastbackend.model.CityWeather;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -32,14 +33,16 @@ public class WeatherAnalyticsService {
 
             try {
                 WeatherResponseDto weather = weatherService.fetchWeather(city.cityCode());
-
                 CityWeather cityWeather = buildCityWeather(city, weather);
-
                 results.add(cityWeather);
 
             } catch (Exception e) {
                 log.error("Failed to fetch weather for city {}", city.cityCode(), e);
             }
+        }
+
+        if (results.isEmpty()) {
+            throw new WeatherDataUnavailableException("Weather data is currently unavailable");
         }
 
         // Highest comfort index first
