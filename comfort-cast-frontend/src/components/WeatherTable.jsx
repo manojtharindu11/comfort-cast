@@ -14,7 +14,7 @@ export default function WeatherTable({ cities }) {
             <TableHead className="text-right">Temp</TableHead>
             <TableHead className="text-right">Humidity</TableHead>
             <TableHead className="text-right">Wind</TableHead>
-            <TableHead className="w-44">Pressure</TableHead>
+            <TableHead className="text-right">Pressure</TableHead>
             <TableHead className="w-44">Comfort Score</TableHead>
           </TableRow>
         </TableHeader>
